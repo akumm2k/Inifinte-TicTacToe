@@ -6,6 +6,11 @@
 ## Sample run
 
 ```
+g++ -std=c++17 main.cpp
+./a.out
+```
+
+```
 Enter tiles to win:
 5
 Enter Player 1's name: 
@@ -35,7 +40,7 @@ Move made: (0, 3)
 Winner: Tyler
 -(0, 0)-(0, 1)-(0, 2)-(0, 3)-(0, 4)-
 ```
-Alternatively, one can use different tests from the tests/ directory, or better yet, one can use their own, using redirection as so: `./[path-to-executable] < [path-to-test-file]`
+Alternatively, one can use different tests from the `tests/` directory, or better yet, one can use their own, using redirection as so: `./[path-to-executable] < [path-to-test-file]`
 
 ## Implementation
 
