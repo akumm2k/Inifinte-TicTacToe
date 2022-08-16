@@ -1,6 +1,8 @@
 #pragma once
 
 // Std lib imports
+#include <cassert>
+#include <regex>
 #include <string>
 
 // local imports
@@ -14,18 +16,15 @@ class ViewController {
     bool input_valid_pos(int& x, int& y) const {
         std::string inp {};
         getline(std::cin, inp);
-        int space_countr {0};
-        std::string nums[2];
-        for (auto && c : inp) {
-            if (!std::isdigit(c)) {
-                if (c == ' ') {
-                    if(++space_countr > 1)
-                        return false;
-                } else 
-                    return false;
-            } else 
-                nums[space_countr] += c;
+
+        std::regex re("(-?\\d+) (-?\\d+)");
+        std::smatch nums;
+        while (!std::regex_match(inp, nums, re)) {
+            std::cout << "Bad input.\nValid input: <int> <int>\n";
+            std::cout << "Enter move again: ";
+            getline(std::cin, inp);
         }
+
         x = std::stoi(nums[0]);
         y = std::stoi(nums[1]);
         return true;
@@ -46,9 +45,12 @@ class ViewController {
         getline(std::cin, players[1]);
         std::cout << "Enter Player 2's name: \n";
         getline(std::cin, players[0]);
+
         for (int i = 1; i >= 0; i--)
             if (players[i] == "")
                 players[i] = "Player " + std::to_string(i);
+
+        assert(players[0] != players[1] && "different playas please");
     }
 
     void get_tiles_to_win() {
