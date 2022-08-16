@@ -1,6 +1,10 @@
 #pragma once
-#include "tictactoe-model.hpp"
+
+// Std lib imports
 #include <string>
+
+// local imports
+#include "tictactoe-model.hpp"
 
 class ViewController {
 
@@ -8,9 +12,9 @@ class ViewController {
     size_t tiles_to_win;
 
     bool input_valid_pos(int& x, int& y) const {
-        std::string inp;
+        std::string inp {};
         getline(std::cin, inp);
-        int space_countr = 0;
+        int space_countr {0};
         std::string nums[2];
         for (auto && c : inp) {
             if (!std::isdigit(c)) {
@@ -28,11 +32,11 @@ class ViewController {
     }
 
     void print_win_line(const WinLine& win_line) const {
-        std::shared_ptr<WinPoint> t = win_line.head;
+        std::shared_ptr<WinPoint> itr {win_line.head};
         std::cout << '-';
-        while (t) {
-            std::cout << WinPoint::str_point(t->point) << "-";
-            t = t->next;
+        while (itr) {
+            std::cout << WinPoint::str_point(itr->point) << "-";
+            itr = itr->next;
         }
         std::cout << '\n';
     }
@@ -62,9 +66,9 @@ public:
         
     void play() const {
         TicTacToe game(tiles_to_win);
-        int x, y;
+        int x {}, y {};
         while(!game.has_winner()) {
-            const auto turn = game.get_turn();
+            const auto turn {game.get_turn()};
             std::cout << players[turn] << "'s turn: ";
 
             while(!input_valid_pos(x, y)) 
@@ -75,7 +79,7 @@ public:
             else 
                 std::cout << "Invalid move! Tile occupied.\n";
         }
-        const size_t winner = game.get_winner();
+        const winner_type winner {game.get_winner()};
         std::cout << "Winner: " << players[winner] << '\n';
         print_win_line(game.get_win_line());
     }

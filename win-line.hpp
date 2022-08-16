@@ -1,7 +1,10 @@
 #pragma once
+
+// Std lib imports
 #include <iostream>
 #include <string>
 #include <memory>
+
 using point_type = std::pair<int, int>;
 
 struct WinPoint {
@@ -13,7 +16,7 @@ struct WinPoint {
 	WinPoint(point_type p, std::shared_ptr<WinPoint> next) 
 		: point(p), next(next) { }
 	
-	static std::string str_point(point_type p) {
+	static std::string str_point(const point_type& p) {
 		return "(" + std::to_string(p.first) + ", " 
 			+ std::to_string(p.second) + ")";
 	}
@@ -49,7 +52,7 @@ struct WinLine {
 		: count(0), tiles_to_win(tiles_to_win), head(nullptr), tail(nullptr) { }
 
 	void add(const point_type& p) {
-		auto new_point = std::make_shared<WinPoint>(p); 
+		auto new_point {std::make_shared<WinPoint>(p)}; 
 
 		if (count == 0) {
 			head = new_point;
@@ -66,11 +69,11 @@ struct WinLine {
 		}
 	}
 
-	const void print_line() const {
-		std::shared_ptr<WinPoint> t = head;
-		while(t) {
-			std::cout << WinPoint::str_point(t->point) << " -> ";
-			t = t->next;
+	void print_line() const {
+		std::shared_ptr<WinPoint> itr {head};
+		while(itr) {
+			std::cout << WinPoint::str_point(itr->point) << " -> ";
+			itr = itr->next;
 		}
 		std::cout << '\n';
 	}

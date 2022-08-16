@@ -1,9 +1,14 @@
 #pragma once
+
+// Std lib imports
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+
+// local imports
 #include "win-line.hpp"
 
+// Create hash for std::pair
 struct hash_pair {
     template <class T1, class T2>
     size_t operator()(const std::pair<T1, T2>& p) const {
@@ -13,12 +18,13 @@ struct hash_pair {
     }
 };
 
+// type aliases
+using player_type = uint8_t;
+using board_type = std::unordered_map<point_type, player_type, hash_pair>;
+using winner_type = int8_t;
+
 class TicTacToe {
-	using player_type = uint8_t;
-	using board_type = std::unordered_map<point_type, player_type, hash_pair>;
-	using winner_type = int8_t;
-	
-	player_type player {1};
+	player_type player;
 	const size_t tiles_to_win;
 	board_type board;
 
@@ -35,13 +41,7 @@ class TicTacToe {
 		return board.find(point) != board.end();
 	}
 
-	void print_board() {
-		for (const auto &[pnt, pl] : board)
-			std::cout << pnt.first << "," << pnt.second << ": " << static_cast<int>(pl) << "\n";
-	}
-
 	bool check_win(const point_type& point) { 
-		print_board();
 		if (tiles_to_win == 1 && board_contains(point)) {
 			// why play this game?
 			line = WinLine(1);
@@ -79,7 +79,7 @@ class TicTacToe {
 
 public:
 
-	TicTacToe(const size_t tiles_to_win = 5) : 
+	TicTacToe(const size_t tiles_to_win = 5) : player(1),
 		tiles_to_win(tiles_to_win), winner(-1) { }
 	
 	player_type get_turn() const noexcept {
