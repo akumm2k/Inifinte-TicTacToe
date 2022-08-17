@@ -58,7 +58,7 @@ class TicTacToe {
 			WinLine new_line(tiles_to_win);
 			// check for ${tiles_to_win} consecutive plays in 
 			// a line of (2 * tiles_to_win) tiles
-			size_t loop {2 * tiles_to_win}; 
+			size_t loop {tiles_to_win << 1}; 
 			
 			while (loop > 0) { 
 				if (board_contains({x, y}) && board[{x, y}] == player) {
