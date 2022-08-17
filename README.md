@@ -6,8 +6,7 @@
 ## Sample run
 
 ```
-g++ -std=c++17 main.cpp
-./a.out
+g++ -std=c++20 main.cpp && ./a.out
 ```
 
 ```
@@ -41,6 +40,10 @@ Winner: Tyler
 -(0, 0)-(0, 1)-(0, 2)-(0, 3)-(0, 4)-
 ```
 Alternatively, one can use different tests from the `tests/` directory, or better yet, one can use their own, using redirection as so: `./[path-to-executable] < [path-to-test-file]`
+
+```
+./a.out < tests/horizontal-jim.in
+```
 
 ## Implementation
 
