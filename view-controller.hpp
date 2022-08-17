@@ -25,8 +25,8 @@ class ViewController {
             getline(std::cin, inp);
         }
 
-        x = std::stoi(nums[0]);
-        y = std::stoi(nums[1]);
+        x = std::stoi(nums[1]);
+        y = std::stoi(nums[2]);
         return true;
     }
 
