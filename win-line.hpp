@@ -23,6 +23,10 @@ struct WinPoint {
 };
 
 struct WinLine {
+	/**
+	 * @brief LinkedList implementation to stor the winning line
+	 */
+
 	size_t count, tiles_to_win;
 	std::shared_ptr<WinPoint> head, tail;
 
@@ -69,7 +73,8 @@ struct WinLine {
 		}
 	}
 
-	void print_line() const {
+	void print_winning_line() const {
+		// TODO: move to view-controller
 		std::shared_ptr<WinPoint> itr {head};
 		while(itr) {
 			std::cout << WinPoint::str_point(itr->point) << " -> ";

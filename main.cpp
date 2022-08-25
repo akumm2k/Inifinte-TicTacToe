@@ -2,7 +2,6 @@
 #include "view-controller.hpp"
 
 int main(void) {
-	ViewController my_game;
-    my_game.play();
+	ViewController::play();
 	return 0;
 }

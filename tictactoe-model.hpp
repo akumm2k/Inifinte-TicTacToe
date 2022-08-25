@@ -24,8 +24,10 @@ using board_type = std::unordered_map<point_type, player_type, hash_pair>;
 using winner_type = int8_t;
 
 class TicTacToe {
-	player_type player;
 	const size_t tiles_to_win;
+	const std::vector<std::string> player_names;
+
+	player_type player;
 	board_type board;
 
 	winner_type winner;
@@ -79,15 +81,17 @@ class TicTacToe {
 
 public:
 
-	TicTacToe(const size_t tiles_to_win = 5) : player(1),
-		tiles_to_win(tiles_to_win), winner(-1) { }
+	TicTacToe(const std::string& player1_name, const std::string& player2_name
+	, const size_t tiles_to_win = 5) : 
+		player(1), tiles_to_win(tiles_to_win), winner(-1), 
+		player_names({player1_name, player2_name}) { }
 	
-	player_type get_turn() const noexcept {
-		return player;
+	std::string get_turn() const {
+		return player_names[player];
 	}
 
-	winner_type get_winner() const noexcept {
-		return winner;
+	const std::string& get_winner() const {
+		return player_names[winner];
 	}
 
 	const WinLine& get_win_line() const {
