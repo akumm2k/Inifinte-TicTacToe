@@ -12,7 +12,7 @@
 
 class ViewController {
 
-    static std::pair<int, int> get_pos() {
+    static const std::pair<int, int> get_pos() {
         std::string re {"(-?\\d+) (-?\\d+)"};
         std::string prompt {"Enter move:"};
         const auto nums {validated_response(prompt, re, "<int> <int>")};
@@ -53,7 +53,7 @@ class ViewController {
         return player_names;
     }
 
-    static std::vector<std::string> validated_response(
+    static const std::vector<std::string> validated_response(
         const std::string& prompt, const std::string& regex, 
         const std::string& usage
     ) {
@@ -82,7 +82,7 @@ class ViewController {
     }
 
     static int get_tiles_to_win() {
-        const std::string number_regex {"(\\d+)"};
+        const std::string number_regex {"(^[1-9]\\d*)"};
         const std::string usage = {
             "<number of tiles to win>"
         };
