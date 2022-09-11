@@ -93,6 +93,12 @@ class ViewController {
     }
 
 public:
+
+    ViewController() {
+        throw std::runtime_error(
+            "This is a utility class and cannot be instantiated"
+        );
+    }
         
     static void play() {
         const int tiles_to_win {get_tiles_to_win()};
