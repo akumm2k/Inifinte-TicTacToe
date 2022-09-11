@@ -35,7 +35,7 @@ class ViewController {
     
     static const std::vector<std::string> get_player_names() {
         std::vector<std::string> player_names {};
-        const std::string name_re {"(^[a-z ,.'-]+$)"};
+        const std::string name_re {"(^[A-Z-a-z ,.'-]+$)"};
 
         for (int i = 0; i < 2; i++) {
             const auto name_matches {
@@ -65,7 +65,7 @@ class ViewController {
         std::getline(std::cin, input);
 
         while (!std::regex_match(input, matches, re)) {
-            std::cout << "Bad input.\n";
+            std::cout << "Bad input: " << input << '\n';
             std::cout << usage << '\n';
             std::cout << prompt << '\n';
             std::getline(std::cin, input);
