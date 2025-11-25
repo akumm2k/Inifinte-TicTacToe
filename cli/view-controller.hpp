@@ -4,11 +4,11 @@
 #include <cassert>
 #include <regex>
 #include <string>
-#include <algorithm> 
+#include <algorithm>
 #include <iterator>
 
 // local imports
-#include "tictactoe-model.hpp"
+#include <model/tictactoe-model.hpp>
 
 class ViewController {
 
@@ -19,7 +19,7 @@ class ViewController {
 
         int x = std::stoi(nums[1]);
         int y = std::stoi(nums[2]);
-        
+
         return {x, y};
     }
 
@@ -32,7 +32,7 @@ class ViewController {
         }
         std::cout << '\n';
     }
-    
+
     static const std::vector<std::string> get_player_names() {
         std::vector<std::string> player_names {};
         const std::string name_re {"(^[A-Z-a-z ,.'-]+$)"};
@@ -47,14 +47,14 @@ class ViewController {
             player_names.emplace_back(name_matches[1]);
         }
 
-        assert(player_names[0] != player_names[1] 
+        assert(player_names[0] != player_names[1]
             && "different playas please");
 
         return player_names;
     }
 
     static const std::vector<std::string> validated_response(
-        const std::string& prompt, const std::string& regex, 
+        const std::string& prompt, const std::string& regex,
         const std::string& usage
     ) {
         const std::regex re(regex);
@@ -72,7 +72,7 @@ class ViewController {
         }
 
         // return matches;
-        // ! for some reason returning matches fills the 
+        // ! for some reason returning matches fills the
         // ! returned object with garbage values
 
         std::vector<std::string> ret {};
@@ -99,7 +99,7 @@ public:
             "This is a utility class and cannot be instantiated"
         );
     }
-        
+
     static void play() {
         const int tiles_to_win {get_tiles_to_win()};
         const auto player_names {get_player_names()};
@@ -112,10 +112,10 @@ public:
             std::cout << player_to_play << "'s turn:\n";
 
             auto [x, y] = get_pos();
-            
+
             if (game.move({x, y}))
                 std::cout << "Move made: " << WinPoint::str_point({x, y}) << '\n';
-            else 
+            else
                 std::cout << "Invalid move! Tile occupied.\n";
         }
         const std::string winner {game.get_winner()};

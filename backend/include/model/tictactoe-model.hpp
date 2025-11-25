@@ -31,11 +31,11 @@ class TicTacToe {
 	board_type board;
 
 	winner_type winner;
-	const std::vector<std::pair<int8_t, int8_t>> dirs 
-	{{0, 1}, // right 
+	const std::vector<std::pair<int8_t, int8_t>> dirs
+	{{0, 1}, // right
 	{-1, 1}, // up and right
-	{-1, 0}, // up 
-	{1, 1}}; // down and right 
+	{-1, 0}, // up
+	{1, 1}}; // down and right
 
 	WinLine line;
 
@@ -43,31 +43,31 @@ class TicTacToe {
 		return board.find(point) != board.end();
 	}
 
-	bool check_win(const point_type& point) { 
+	bool check_win(const point_type& point) {
 		if (tiles_to_win == 1 && board_contains(point)) {
 			// why play this game?
 			line = WinLine(1);
 			line.add(point);
-			return true; 
+			return true;
 		}
 
 		for (auto &&dir : dirs) {
 			const int8_t dx {dir.first}, dy {dir.second};
 			size_t countr {0};
-			int x {static_cast<int>(point.first - tiles_to_win * dx)}, 
-				y {static_cast<int>(point.second - tiles_to_win * dy)}; 
+			int x {static_cast<int>(point.first - tiles_to_win * dx)},
+				y {static_cast<int>(point.second - tiles_to_win * dy)};
 
 			WinLine new_line(tiles_to_win);
-			// check for ${tiles_to_win} consecutive plays in 
+			// check for ${tiles_to_win} consecutive plays in
 			// a line of (2 * tiles_to_win) tiles
-			size_t loop {tiles_to_win << 1}; 
-			
-			while (loop > 0) { 
+			size_t loop {tiles_to_win << 1};
+
+			while (loop > 0) {
 				if (board_contains({x, y}) && board[{x, y}] == turn) {
 					new_line.add({x, y});
 					countr++;
 					if (countr == tiles_to_win) {
-						line = (new_line); 
+						line = (new_line);
 						return true;
 					}
 				}
@@ -77,17 +77,25 @@ class TicTacToe {
 			}
 		}
 		return false;
-	}	
+	}
 
 public:
 
-	TicTacToe(const std::string& player1_name, 
-	const std::string& player2_name, const size_t tiles_to_win = 5) : 
-		turn(1), tiles_to_win(tiles_to_win), winner(-1), 
+	TicTacToe(
+		const std::string& player1_name,
+		const std::string& player2_name,
+		const size_t tiles_to_win = 5) :
+		turn(1),
+		tiles_to_win(tiles_to_win),
+		winner(-1),
 		player_names({player1_name, player2_name}) { }
-	
+
 	std::string get_turn() const {
 		return player_names[turn];
+	}
+
+	board_type get_board() const noexcept {
+		return board;
 	}
 
 	const std::string& get_winner() const {
@@ -105,7 +113,7 @@ public:
 	bool move(const point_type& point) {
 		if (!board_contains(point)) {
 			board[point] = turn;
-			if (check_win(point)) 
+			if (check_win(point))
 				winner = turn;
 			turn = 1 - turn;
 			return true;
