@@ -42,7 +42,7 @@ Winner: Tyler
 Alternatively, one can use different tests from the `tests/` directory, or better yet, one can use their own, using redirection as so: `./[path-to-executable] < [path-to-test-file]`
 
 ```
-./a.out < tests/horizontal-jim.in
+./a.out < tests/data/horizontal-jim.in
 ```
 
 ## Implementation
